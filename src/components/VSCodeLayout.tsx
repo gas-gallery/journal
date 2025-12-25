@@ -14,6 +14,7 @@ function VSCodeLayout({ children }: VSCodeLayoutProps) {
   const [sidebarVisible, setSidebarVisible] = useState(true)
   const [inboxTasks, setInboxTasks] = useState<InboxTask[]>([])
   const [newTaskName, setNewTaskName] = useState('')
+  const [menuTaskId, setMenuTaskId] = useState<string | null>(null)
 
   useEffect(() => {
     if (activeView === 'inbox') {
@@ -54,6 +55,18 @@ function VSCodeLayout({ children }: VSCodeLayoutProps) {
       }
     } catch (error) {
       console.error('Failed to update task:', error)
+    }
+  }
+
+  const handleDeleteTask = async (id: string) => {
+    try {
+      const response = await API.deleteInboxTask(id)
+      if (response.success) {
+        setInboxTasks(inboxTasks.filter(task => task.id !== id))
+        setMenuTaskId(null)
+      }
+    } catch (error) {
+      console.error('Failed to delete task:', error)
     }
   }
 
@@ -196,6 +209,24 @@ function VSCodeLayout({ children }: VSCodeLayoutProps) {
                               />
                               <span>{task.name}</span>
                             </label>
+                            <div className="sidebar-task-actions">
+                              <button
+                                className="sidebar-task-menu-button"
+                                onClick={() => setMenuTaskId(menuTaskId === task.id ? null : task.id)}
+                              >
+                                •••
+                              </button>
+                              {menuTaskId === task.id && (
+                                <div className="sidebar-task-menu">
+                                  <button
+                                    className="sidebar-task-menu-item"
+                                    onClick={() => handleDeleteTask(task.id)}
+                                  >
+                                    Delete
+                                  </button>
+                                </div>
+                              )}
+                            </div>
                           </li>
                         ))}
                       </ul>

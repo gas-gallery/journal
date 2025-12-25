@@ -248,6 +248,10 @@
 .sidebar-task-item {
     padding: 4px 0;
     font-size: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
 }
 
 .sidebar-task-label {
@@ -278,6 +282,59 @@
     text-align: center;
     padding: 20px 0;
     margin: 0;
+}
+
+.sidebar-task-actions {
+    position: relative;
+    margin-left: 4px;
+    flex-shrink: 0;
+}
+
+.sidebar-task-menu-button {
+    background: none;
+    border: none;
+    color: #858585;
+    cursor: pointer;
+    padding: 2px 4px;
+    font-size: 12px;
+    line-height: 1;
+    border-radius: 2px;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+.sidebar-task-menu-button:hover {
+    background-color: #3c3c3c;
+    color: #cccccc;
+}
+
+.sidebar-task-menu {
+    position: absolute;
+    right: 0;
+    top: 100%;
+    margin-top: 2px;
+    background-color: #252526;
+    border: 1px solid #3c3c3c;
+    border-radius: 2px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+    z-index: 100;
+    min-width: 100px;
+}
+
+.sidebar-task-menu-item {
+    display: block;
+    width: 100%;
+    padding: 6px 10px;
+    background: none;
+    border: none;
+    color: #cccccc;
+    text-align: left;
+    cursor: pointer;
+    font-size: 12px;
+    transition: background-color 0.2s;
+}
+
+.sidebar-task-menu-item:hover {
+    background-color: #2d2d30;
 }
 
 /* Search View */
