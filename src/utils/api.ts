@@ -33,6 +33,11 @@ function getMockData(functionName: string, args: any[]): any {
         success: true,
         data: { id: args[0] }
       };
+    case 'setSomedayInboxTask':
+      return {
+        success: true,
+        data: { id: args[0] }
+      };
     default:
       return { success: false, error: 'Unknown function' };
   }
@@ -84,4 +89,7 @@ export const API = {
   
   deleteInboxTask: (id: string) => 
     callGASFunction<APIResponse<{ id: string }>>('deleteInboxTask', id),
+  
+  setSomedayInboxTask: (id: string) => 
+    callGASFunction<APIResponse<{ id: string }>>('setSomedayInboxTask', id),
 };

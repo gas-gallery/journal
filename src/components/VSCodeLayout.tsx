@@ -70,6 +70,18 @@ function VSCodeLayout({ children }: VSCodeLayoutProps) {
     }
   }
 
+  const handleSetSomeday = async (id: string) => {
+    try {
+      const response = await API.setSomedayInboxTask(id)
+      if (response.success) {
+        setInboxTasks(inboxTasks.filter(task => task.id !== id))
+        setMenuTaskId(null)
+      }
+    } catch (error) {
+      console.error('Failed to set someday:', error)
+    }
+  }
+
   const handleViewChange = (view: typeof activeView, path: string) => {
     setActiveView(view)
     setSidebarVisible(true)
@@ -218,6 +230,12 @@ function VSCodeLayout({ children }: VSCodeLayoutProps) {
                               </button>
                               {menuTaskId === task.id && (
                                 <div className="sidebar-task-menu">
+                                  <button
+                                    className="sidebar-task-menu-item"
+                                    onClick={() => handleSetSomeday(task.id)}
+                                  >
+                                    Someday
+                                  </button>
                                   <button
                                     className="sidebar-task-menu-item"
                                     onClick={() => handleDeleteTask(task.id)}

@@ -63,6 +63,18 @@ function Inbox() {
     }
   }
 
+  const handleSetSomeday = async (id: string) => {
+    try {
+      const response = await API.setSomedayInboxTask(id)
+      if (response.success) {
+        setTasks(tasks.filter(task => task.id !== id))
+        setMenuTaskId(null)
+      }
+    } catch (error) {
+      console.error('Failed to set someday:', error)
+    }
+  }
+
   return (
     <div className="inbox">
       <div className="inbox-header">
@@ -106,6 +118,12 @@ function Inbox() {
                   </button>
                   {menuTaskId === task.id && (
                     <div className="task-menu">
+                      <button
+                        className="task-menu-item"
+                        onClick={() => handleSetSomeday(task.id)}
+                      >
+                        Someday
+                      </button>
                       <button
                         className="task-menu-item"
                         onClick={() => handleDeleteTask(task.id)}
