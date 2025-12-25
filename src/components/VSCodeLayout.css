@@ -497,6 +497,22 @@
 
 .editor-content {
     flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.editor-content-topbar {
+    padding: 8px 16px;
+    border-bottom: 1px solid #3c3c3c;
+    background-color: #252526;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.editor-content-body {
+    flex: 1;
     overflow-y: auto;
     padding: 20px;
 }

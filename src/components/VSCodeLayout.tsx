@@ -19,6 +19,7 @@ function VSCodeLayout({ children }: VSCodeLayoutProps) {
   const [activeTabIndex, setActiveTabIndex] = useState(0)
   const [sidebarVisible, setSidebarVisible] = useState(false)
   const [secondarySidebarView, setSecondarySidebarView] = useState<'find' | null>(null)
+  const [showDescription, setShowDescription] = useState(true)
   const [inboxTasks, setInboxTasks] = useState<InboxTask[]>([])
   const [newTaskName, setNewTaskName] = useState('')
   const [menuTaskId, setMenuTaskId] = useState<string | null>(null)
@@ -265,7 +266,23 @@ function VSCodeLayout({ children }: VSCodeLayoutProps) {
             ))}
           </div>
           <div className="editor-content">
-            {children}
+            <div className="editor-content-topbar">
+              <div className="topbar-actions">
+                <button
+                  className={`toggle-btn ${showDescription ? 'active' : ''}`}
+                  onClick={() => setShowDescription(!showDescription)}
+                  title="Show Description"
+                >
+                  <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                    <path d="M3 3h10v2H3V3zm0 4h10v2H3V7zm0 4h7v2H3v-2z"/>
+                  </svg>
+                  Description
+                </button>
+              </div>
+            </div>
+            <div className="editor-content-body">
+              {children}
+            </div>
           </div>
         </div>
 
