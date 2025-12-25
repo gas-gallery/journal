@@ -10,7 +10,8 @@ interface VSCodeLayoutProps {
 function VSCodeLayout({ children }: VSCodeLayoutProps) {
   const navigate = useNavigate()
   const [activeView, setActiveView] = useState<'inbox' | 'forecast' | 'flagged' | 'projects' | 'tags' | 'review'>('inbox')
-  const [sidebarVisible, setSidebarVisible] = useState(true)
+  const [sidebarVisible, setSidebarVisible] = useState(false)
+  const [secondarySidebarView, setSecondarySidebarView] = useState<'find' | null>(null)
   const [inboxTasks, setInboxTasks] = useState<InboxTask[]>([])
   const [newTaskName, setNewTaskName] = useState('')
   const [menuTaskId, setMenuTaskId] = useState<string | null>(null)
@@ -83,8 +84,17 @@ function VSCodeLayout({ children }: VSCodeLayoutProps) {
 
   const handleViewChange = (view: typeof activeView, path: string) => {
     setActiveView(view)
-    setSidebarVisible(true)
     navigate(path)
+  }
+
+  const handleSecondarySidebarClick = (view: 'find') => {
+    if (secondarySidebarView === view) {
+      setSecondarySidebarView(null)
+      setSidebarVisible(false)
+    } else {
+      setSecondarySidebarView(view)
+      setSidebarVisible(true)
+    }
   }
 
   return (
@@ -173,17 +183,12 @@ function VSCodeLayout({ children }: VSCodeLayoutProps) {
           </div>
         </div>
 
-        {/* Sidebar */}
+        {/* Sidebar - moved next to secondary-sidebar */}
         {sidebarVisible && (
           <div className="sidebar">
             <div className="sidebar-header">
               <span className="sidebar-title">
-                {activeView === 'inbox' && 'INBOX'}
-                {activeView === 'forecast' && 'FORECAST'}
-                {activeView === 'flagged' && 'FLAGGED'}
-                {activeView === 'projects' && 'PROJECTS'}
-                {activeView === 'tags' && 'TAGS'}
-                {activeView === 'review' && 'REVIEW'}
+                {secondarySidebarView === 'find' && 'FIND'}
               </span>
               <button 
                 className="sidebar-close"
@@ -193,102 +198,13 @@ function VSCodeLayout({ children }: VSCodeLayoutProps) {
               </button>
             </div>
             <div className="sidebar-content">
-              {activeView === 'inbox' && (
-                <div className="sidebar-inbox">
-                  <div className="sidebar-inbox-input">
-                    <input
-                      type="text"
-                      className="sidebar-input"
-                      placeholder="New task..."
-                      value={newTaskName}
-                      onChange={(e) => setNewTaskName(e.target.value)}
-                      onKeyPress={handleKeyPress}
-                    />
-                  </div>
-                  <div className="sidebar-inbox-list">
-                    {inboxTasks.length === 0 ? (
-                      <p className="sidebar-empty">No tasks</p>
-                    ) : (
-                      <ul className="sidebar-task-list">
-                        {inboxTasks.map((task) => (
-                          <li key={task.id} className="sidebar-task-item">
-                            <label className="sidebar-task-label">
-                              <input
-                                type="checkbox"
-                                checked={task.done}
-                                onChange={() => handleToggleDone(task.id, task.done)}
-                              />
-                              <span>{task.name}</span>
-                            </label>
-                            <div className="sidebar-task-actions">
-                              <button
-                                className="sidebar-task-menu-button"
-                                onClick={() => setMenuTaskId(menuTaskId === task.id ? null : task.id)}
-                              >
-                                •••
-                              </button>
-                              {menuTaskId === task.id && (
-                                <div className="sidebar-task-menu">
-                                  <button
-                                    className="sidebar-task-menu-item"
-                                    onClick={() => handleSetSomeday(task.id)}
-                                  >
-                                    Someday
-                                  </button>
-                                  <button
-                                    className="sidebar-task-menu-item"
-                                    onClick={() => handleDeleteTask(task.id)}
-                                  >
-                                    Delete
-                                  </button>
-                                </div>
-                              )}
-                            </div>
-                          </li>
-                        ))}
-                      </ul>
-                    )}
-                  </div>
-                </div>
-              )}
-              {activeView === 'forecast' && (
-                <div className="tree-view">
-                  <div className="tree-item">
-                    <span className="tree-icon">📅</span>
-                    <span className="tree-label">Forecast</span>
-                  </div>
-                </div>
-              )}
-              {activeView === 'flagged' && (
-                <div className="tree-view">
-                  <div className="tree-item">
-                    <span className="tree-icon">🚩</span>
-                    <span className="tree-label">Flagged</span>
-                  </div>
-                </div>
-              )}
-              {activeView === 'projects' && (
-                <div className="tree-view">
-                  <div className="tree-item">
-                    <span className="tree-icon">📁</span>
-                    <span className="tree-label">Projects</span>
-                  </div>
-                </div>
-              )}
-              {activeView === 'tags' && (
-                <div className="tree-view">
-                  <div className="tree-item">
-                    <span className="tree-icon">🏷️</span>
-                    <span className="tree-label">Tags</span>
-                  </div>
-                </div>
-              )}
-              {activeView === 'review' && (
-                <div className="tree-view">
-                  <div className="tree-item">
-                    <span className="tree-icon">⭐</span>
-                    <span className="tree-label">Review</span>
-                  </div>
+              {secondarySidebarView === 'find' && (
+                <div className="search-view">
+                  <input
+                    type="text"
+                    className="search-input"
+                    placeholder="Search..."
+                  />
                 </div>
               )}
             </div>
@@ -313,7 +229,8 @@ function VSCodeLayout({ children }: VSCodeLayoutProps) {
         <div className="secondary-sidebar">
           <div className="secondary-sidebar-items">
             <button 
-              className="secondary-sidebar-item"
+              className={`secondary-sidebar-item ${secondarySidebarView === 'find' ? 'active' : ''}`}
+              onClick={() => handleSecondarySidebarClick('find')}
               title="Find"
             >
               <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
