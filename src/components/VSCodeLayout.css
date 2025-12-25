@@ -517,6 +517,42 @@
     padding: 20px;
 }
 
+.topbar-actions {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.toggle-btn {
+    background: none;
+    border: 1px solid #3c3c3c;
+    color: #858585;
+    padding: 4px 12px;
+    font-size: 12px;
+    cursor: pointer;
+    border-radius: 2px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: all 0.2s;
+}
+
+.toggle-btn:hover {
+    background-color: #3c3c3c;
+    color: #cccccc;
+}
+
+.toggle-btn.active {
+    background-color: #00ff00;
+    color: #1e1e1e;
+    border-color: #00ff00;
+}
+
+.toggle-btn svg {
+    width: 16px;
+    height: 16px;
+}
+
 /* Status Bar */
 .status-bar {
     height: 22px;
