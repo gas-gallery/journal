@@ -96,19 +96,29 @@ function VSCodeLayout({ children }: VSCodeLayoutProps) {
             <div className="sidebar-content">
               {activeView === 'explorer' && (
                 <div className="tree-view">
-                  <div className="tree-item expanded">
-                    <span className="tree-icon">▼</span>
-                    <span className="tree-label">TASK MANAGEMENT</span>
+                  <div className="tree-item">
+                    <span className="tree-icon">📥</span>
+                    <span className="tree-label">Inbox</span>
                   </div>
-                  <div className="tree-item-child">
-                    <div className="tree-item">
-                      <span className="tree-icon">📄</span>
-                      <span className="tree-label">Dashboard</span>
-                    </div>
-                    <div className="tree-item">
-                      <span className="tree-icon">📄</span>
-                      <span className="tree-label">Tasks</span>
-                    </div>
+                  <div className="tree-item">
+                    <span className="tree-icon">📅</span>
+                    <span className="tree-label">Forecast</span>
+                  </div>
+                  <div className="tree-item">
+                    <span className="tree-icon">🚩</span>
+                    <span className="tree-label">Flagged</span>
+                  </div>
+                  <div className="tree-item">
+                    <span className="tree-icon">📁</span>
+                    <span className="tree-label">Projects</span>
+                  </div>
+                  <div className="tree-item">
+                    <span className="tree-icon">🏷️</span>
+                    <span className="tree-label">Tags</span>
+                  </div>
+                  <div className="tree-item">
+                    <span className="tree-icon">⭐</span>
+                    <span className="tree-label">Review</span>
                   </div>
                 </div>
               )}

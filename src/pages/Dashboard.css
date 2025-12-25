@@ -1,47 +1,47 @@
 .dashboard {
-  padding: 0;
+    padding: 0;
 }
 
 .dashboard h2 {
-  margin-bottom: 16px;
-  color: #cccccc;
-  font-size: 20px;
-  font-weight: 300;
-  padding-bottom: 8px;
-  border-bottom: 1px solid #3c3c3c;
+    margin-bottom: 16px;
+    color: #cccccc;
+    font-size: 20px;
+    font-weight: 300;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #3c3c3c;
 }
 
 .dashboard-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-  gap: 12px;
-  margin-bottom: 20px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 12px;
+    margin-bottom: 20px;
 }
 
 .stat-card {
-  text-align: center;
-  padding: 20px 12px;
+    text-align: center;
+    padding: 20px 12px;
 }
 
 .stat-card h3 {
-  font-size: 11px;
-  color: #858585;
-  margin-bottom: 12px;
-  font-weight: 400;
-  text-transform: uppercase;
-  letter-spacing: 1px;
+    font-size: 11px;
+    color: #858585;
+    margin-bottom: 12px;
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 1px;
 }
 
 .stat-number {
-  font-size: 32px;
-  font-weight: 300;
-  color: #00ff00;
-  margin: 0;
+    font-size: 32px;
+    font-weight: 300;
+    color: #00ff00;
+    margin: 0;
 }
 
 .empty-message {
-  color: #858585;
-  text-align: center;
-  margin: 16px 0;
-  font-size: 13px;
+    color: #858585;
+    text-align: center;
+    margin: 16px 0;
+    font-size: 13px;
 }
