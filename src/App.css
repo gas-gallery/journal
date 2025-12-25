@@ -1,24 +1,15 @@
-.app {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-}
-
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px;
-    width: 100%;
-}
-
+/* Global button styles */
 .btn {
-    padding: 10px 20px;
+    padding: 6px 14px;
     border: none;
     border-radius: 2px;
     cursor: pointer;
     font-size: 13px;
     font-weight: 400;
     transition: all 0.2s;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
 }
 
 .btn-primary {
@@ -40,28 +31,31 @@
     background-color: #505050;
 }
 
+/* Card styles */
 .card {
     background: #252526;
     border-radius: 2px;
-    padding: 20px;
+    padding: 16px;
     border: 1px solid #3c3c3c;
-    margin-bottom: 20px;
+    margin-bottom: 16px;
 }
 
+/* Form styles */
 .form-group {
-    margin-bottom: 15px;
+    margin-bottom: 12px;
 }
 
 .form-label {
     display: block;
-    margin-bottom: 5px;
+    margin-bottom: 6px;
     font-weight: 400;
     color: #cccccc;
+    font-size: 13px;
 }
 
 .form-control {
     width: 100%;
-    padding: 8px;
+    padding: 6px 8px;
     border: 1px solid #3c3c3c;
     border-radius: 2px;
     font-size: 13px;
@@ -72,4 +66,14 @@
 .form-control:focus {
     outline: none;
     border-color: #00ff00;
+    background-color: #1e1e1e;
+}
+
+textarea.form-control {
+    resize: vertical;
+    font-family: inherit;
+}
+
+select.form-control {
+    cursor: pointer;
 }

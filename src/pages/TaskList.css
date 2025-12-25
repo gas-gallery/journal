@@ -1,88 +1,96 @@
+.task-list {
+  padding: 0;
+}
+
 .task-list-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #3c3c3c;
 }
 
 .task-list-header h2 {
-    margin: 0;
-    color: #cccccc;
-    font-size: 18px;
-    font-weight: 400;
+  margin: 0;
+  color: #cccccc;
+  font-size: 20px;
+  font-weight: 300;
 }
 
 .task-form {
-    margin-top: 16px;
+  margin-top: 12px;
 }
 
 .tasks-container {
-    display: grid;
-    gap: 16px;
+  display: grid;
+  gap: 12px;
 }
 
 .task-card {
-    transition: background-color 0.2s, border-color 0.2s;
+  transition: background-color 0.2s, border-color 0.2s;
+  padding: 12px;
 }
 
 .task-card:hover {
-    background-color: #2d2d30;
-    border-color: #00ff00;
+  background-color: #2d2d30;
+  border-color: #00ff00;
 }
 
 .task-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: start;
-    margin-bottom: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+  margin-bottom: 8px;
 }
 
 .task-header h3 {
-    margin: 0;
-    color: #cccccc;
-    font-size: 14px;
-    font-weight: 400;
+  margin: 0;
+  color: #cccccc;
+  font-size: 14px;
+  font-weight: 400;
 }
 
 .status-badge {
-    padding: 2px 8px;
-    border-radius: 2px;
-    font-size: 11px;
-    font-weight: 400;
-    text-transform: uppercase;
+  padding: 2px 8px;
+  border-radius: 2px;
+  font-size: 10px;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
 .status-todo {
-    background-color: #3c3c3c;
-    color: #cccccc;
+  background-color: #3c3c3c;
+  color: #cccccc;
 }
 
 .status-in-progress {
-    background-color: #00ff00;
-    color: #1e1e1e;
+  background-color: #00ff00;
+  color: #1e1e1e;
 }
 
 .status-done {
-    background-color: #858585;
-    color: #1e1e1e;
+  background-color: #858585;
+  color: #1e1e1e;
 }
 
 .task-description {
-    color: #858585;
-    margin: 10px 0;
-    font-size: 13px;
+  color: #858585;
+  margin: 8px 0;
+  font-size: 12px;
 }
 
 .task-footer {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: 15px;
-    padding-top: 12px;
-    border-top: 1px solid #3c3c3c;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid #3c3c3c;
 }
 
 .task-due-date {
-    font-size: 12px;
-    color: #858585;
+  font-size: 11px;
+  color: #858585;
 }

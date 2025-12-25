@@ -22,31 +22,28 @@
 
 メソッド内で以下の分岐処理を実装すること：
 
-- **ローカル環境**: モックデータを使用し、疑似的な応答を返す
-- **リモート環境**: Google Spreadsheet、Gmail、Google Drive などの実際の GAS 処理を実行する
+-   **ローカル環境**: モックデータを使用し、疑似的な応答を返す
+-   **リモート環境**: Google Spreadsheet、Gmail、Google Drive などの実際の GAS 処理を実行する
 
 ## 実装例
 
 ```typescript
 // Environment detection
-const isGASEnvironment = typeof google !== 'undefined' && google.script;
+const isGASEnvironment = typeof google !== "undefined" && google.script;
 
 // API wrapper method
-export function callGASFunction<T>(
-  functionName: string,
-  ...args: any[]
-): Promise<T> {
-  if (isGASEnvironment) {
-    // Remote: Execute actual GAS function
-    return new Promise((resolve, reject) => {
-      google.script.run
-        .withSuccessHandler(resolve)
-        .withFailureHandler(reject)
-        [functionName](...args);
-    });
-  } else {
-    // Local: Return mock data
-    return Promise.resolve(getMockData(functionName, args) as T);
-  }
+export function callGASFunction<T>(functionName: string, ...args: any[]): Promise<T> {
+	if (isGASEnvironment) {
+		// Remote: Execute actual GAS function
+		return new Promise((resolve, reject) => {
+			google.script.run
+				.withSuccessHandler(resolve)
+				.withFailureHandler(reject)
+				[functionName](...args);
+		});
+	} else {
+		// Local: Return mock data
+		return Promise.resolve(getMockData(functionName, args) as T);
+	}
 }
 ```
