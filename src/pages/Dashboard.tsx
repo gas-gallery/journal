@@ -1,6 +1,8 @@
 import { Link } from 'react-router-dom'
 import './Dashboard.css'
 
+export const pageTitle = 'Dashboard'
+
 function Dashboard() {
   return (
     <div className="dashboard">

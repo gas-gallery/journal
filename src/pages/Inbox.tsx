@@ -2,6 +2,8 @@ import { useState, useEffect, KeyboardEvent } from 'react'
 import { API, InboxTask } from '../utils/api'
 import './Inbox.css'
 
+export const pageTitle = 'Inbox'
+
 function Inbox() {
   const [tasks, setTasks] = useState<InboxTask[]>([])
   const [newTaskName, setNewTaskName] = useState('')

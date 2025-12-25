@@ -97,6 +97,18 @@ function VSCodeLayout({ children }: VSCodeLayoutProps) {
     }
   }
 
+  const getPageTitle = () => {
+    const titles: Record<typeof activeView, string> = {
+      inbox: 'Inbox',
+      forecast: 'Forecast',
+      flagged: 'Flagged',
+      projects: 'Projects',
+      tags: 'Tags',
+      review: 'Review'
+    }
+    return titles[activeView]
+  }
+
   return (
     <div className="vscode-layout">
       {/* Title Bar */}
@@ -188,7 +200,7 @@ function VSCodeLayout({ children }: VSCodeLayoutProps) {
           <div className="editor-tabs">
             <div className="editor-tab active">
               <span className="tab-icon">📊</span>
-              <span className="tab-label">Dashboard</span>
+              <span className="tab-label">{getPageTitle()}</span>
               <button className="tab-close">✕</button>
             </div>
           </div>
