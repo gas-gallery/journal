@@ -71,30 +71,62 @@ function getMockData(functionName: string, args: any[]): any {
 				success: true,
 				data: [
 					{
+						project_id: "1",
 						project_name: "Website Redesign",
+						milestone_id: "2",
 						milestone_name: "Phase 2",
+						task_id: "1",
 						task_name: "Design homepage mockup",
 						description: "Create wireframes and visual design",
 					},
 					{
+						project_id: "1",
 						project_name: "Website Redesign",
+						milestone_id: "2",
 						milestone_name: "Phase 2",
+						task_id: "2",
 						task_name: "Implement responsive layout",
 						description: "Make design mobile-friendly",
 					},
 					{
+						project_id: "1",
 						project_name: "Website Redesign",
+						milestone_id: "1",
 						milestone_name: "Phase 1",
+						task_id: "3",
 						task_name: "Research competitors",
 						description: "Analyze 5 competitor websites",
 					},
 					{
+						project_id: "2",
 						project_name: "Mobile App Development",
+						milestone_id: "3",
 						milestone_name: "MVP",
+						task_id: "4",
 						task_name: "Setup development environment",
 						description: "Install tools and dependencies",
 					},
 				],
+			};
+		case "updateProjectName":
+			return {
+				success: true,
+				data: { id: args[0], name: args[1] },
+			};
+		case "updateMilestoneName":
+			return {
+				success: true,
+				data: { id: args[0], name: args[1] },
+			};
+		case "updateTaskName":
+			return {
+				success: true,
+				data: { id: args[0], name: args[1] },
+			};
+		case "updateTaskDescription":
+			return {
+				success: true,
+				data: { id: args[0], description: args[1] },
 			};
 		default:
 			return { success: false, error: "Unknown function" };
@@ -132,8 +164,11 @@ export interface Project {
 }
 
 export interface ProjectTask {
+	project_id: string;
 	project_name: string;
+	milestone_id: string | null;
 	milestone_name: string | null;
+	task_id: string;
 	task_name: string;
 	description: string | null;
 }
@@ -160,4 +195,12 @@ export const API = {
 	createProject: (name: string) => callGASFunction<APIResponse<Project>>("createProject", name),
 
 	getProjectTasks: () => callGASFunction<APIResponse<ProjectTask[]>>("getProjectTasks"),
+
+	updateProjectName: (id: string, name: string) => callGASFunction<APIResponse<{ id: string; name: string }>>("updateProjectName", id, name),
+
+	updateMilestoneName: (id: string, name: string) => callGASFunction<APIResponse<{ id: string; name: string }>>("updateMilestoneName", id, name),
+
+	updateTaskName: (id: string, name: string) => callGASFunction<APIResponse<{ id: string; name: string }>>("updateTaskName", id, name),
+
+	updateTaskDescription: (id: string, description: string) => callGASFunction<APIResponse<{ id: string; description: string }>>("updateTaskDescription", id, description),
 };

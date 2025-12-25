@@ -129,7 +129,7 @@
     margin: 24px 0 12px 0;
     color: #00ff00;
     font-size: 24px;
-    font-weight: 400;
+    font-weight: 700;
     border-bottom: 1px solid #3c3c3c;
     padding-bottom: 8px;
 }
@@ -185,4 +185,61 @@
     text-align: center;
     margin: 40px 0;
     font-size: 13px;
+}
+
+/* Editable items */
+.editable {
+    cursor: pointer;
+    transition: background-color 0.2s;
+    border-radius: 2px;
+}
+
+.editable:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+    outline: 1px solid #3c3c3c;
+}
+
+.edit-input,
+.edit-textarea {
+    width: 100%;
+    background-color: #3c3c3c;
+    border: 1px solid #00ff00;
+    border-radius: 2px;
+    color: #cccccc;
+    padding: 4px 8px;
+    font-family: inherit;
+}
+
+.edit-input:focus,
+.edit-textarea:focus {
+    outline: none;
+    border-color: #00ff00;
+    background-color: #1e1e1e;
+}
+
+.project-edit {
+    font-size: 24px;
+    font-weight: 700;
+    margin: 24px 0 12px 0;
+    padding-bottom: 8px;
+}
+
+.milestone-edit {
+    font-size: 18px;
+    font-weight: 400;
+    margin: 16px 0 8px 0;
+    margin-left: 8px;
+}
+
+.task-edit {
+    font-size: 14px;
+    font-weight: 400;
+    margin: 0 0 4px 0;
+}
+
+.edit-textarea {
+    font-size: 13px;
+    line-height: 1.5;
+    resize: vertical;
+    min-height: 40px;
 }
