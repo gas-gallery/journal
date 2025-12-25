@@ -6,7 +6,7 @@ interface VSCodeLayoutProps {
 }
 
 function VSCodeLayout({ children }: VSCodeLayoutProps) {
-  const [activeView, setActiveView] = useState<'explorer' | 'search' | 'tasks'>('explorer')
+  const [activeView, setActiveView] = useState<'inbox' | 'forecast' | 'flagged' | 'projects' | 'tags' | 'review'>('inbox')
   const [sidebarVisible, setSidebarVisible] = useState(true)
 
   return (
@@ -32,39 +32,75 @@ function VSCodeLayout({ children }: VSCodeLayoutProps) {
         <div className="activity-bar">
           <div className="activity-items">
             <button 
-              className={`activity-item ${activeView === 'explorer' ? 'active' : ''}`}
+              className={`activity-item ${activeView === 'inbox' ? 'active' : ''}`}
               onClick={() => {
-                setActiveView('explorer')
+                setActiveView('inbox')
                 setSidebarVisible(true)
               }}
-              title="Explorer"
+              title="Inbox"
             >
               <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M2.5 3h6.5l2 2h8.5c.83 0 1.5.67 1.5 1.5v11c0 .83-.67 1.5-1.5 1.5h-17c-.83 0-1.5-.67-1.5-1.5v-13c0-.83.67-1.5 1.5-1.5z"/>
+                <path d="M19 3H4.99c-1.11 0-1.98.89-1.98 2L3 19c0 1.11.88 2 1.99 2H19c1.11 0 2-.89 2-2V5c0-1.11-.89-2-2-2zm0 12h-4c0 1.66-1.35 3-3 3s-3-1.34-3-3H4.99V5H19v10z"/>
               </svg>
             </button>
             <button 
-              className={`activity-item ${activeView === 'search' ? 'active' : ''}`}
+              className={`activity-item ${activeView === 'forecast' ? 'active' : ''}`}
               onClick={() => {
-                setActiveView('search')
+                setActiveView('forecast')
                 setSidebarVisible(true)
               }}
-              title="Search"
+              title="Forecast"
             >
               <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M15.5 14h-.79l-.28-.27c.98-1.14 1.57-2.62 1.57-4.23 0-3.59-2.91-6.5-6.5-6.5s-6.5 2.91-6.5 6.5 2.91 6.5 6.5 6.5c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99 1.49-1.49-4.99-5zm-6 0c-2.49 0-4.5-2.01-4.5-4.5s2.01-4.5 4.5-4.5 4.5 2.01 4.5 4.5-2.01 4.5-4.5 4.5z"/>
+                <path d="M19 4h-1V2h-2v2H8V2H6v2H5c-1.11 0-1.99.9-1.99 2L3 20c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V10h14v10zM9 14H7v-2h2v2zm4 0h-2v-2h2v2zm4 0h-2v-2h2v2zm-8 4H7v-2h2v2zm4 0h-2v-2h2v2zm4 0h-2v-2h2v2z"/>
               </svg>
             </button>
             <button 
-              className={`activity-item ${activeView === 'tasks' ? 'active' : ''}`}
+              className={`activity-item ${activeView === 'flagged' ? 'active' : ''}`}
               onClick={() => {
-                setActiveView('tasks')
+                setActiveView('flagged')
                 setSidebarVisible(true)
               }}
-              title="Tasks"
+              title="Flagged"
             >
               <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M19 3h-4.18c-.42-1.16-1.52-2-2.82-2-1.3 0-2.4.84-2.82 2h-4.18c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2v-14c0-1.1-.9-2-2-2zm-7 0c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zm-2 14l-4-4 1.41-1.41 2.59 2.58 6.59-6.59 1.41 1.42-8 8z"/>
+                <path d="M14.4 6L14 4H5v17h2v-7h5.6l.4 2h7V6z"/>
+              </svg>
+            </button>
+            <button 
+              className={`activity-item ${activeView === 'projects' ? 'active' : ''}`}
+              onClick={() => {
+                setActiveView('projects')
+                setSidebarVisible(true)
+              }}
+              title="Projects"
+            >
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M10 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2h-8l-2-2z"/>
+              </svg>
+            </button>
+            <button 
+              className={`activity-item ${activeView === 'tags' ? 'active' : ''}`}
+              onClick={() => {
+                setActiveView('tags')
+                setSidebarVisible(true)
+              }}
+              title="Tags"
+            >
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M21.41 11.58l-9-9C12.05 2.22 11.55 2 11 2H4c-1.1 0-2 .9-2 2v7c0 .55.22 1.05.59 1.42l9 9c.36.36.86.58 1.41.58.55 0 1.05-.22 1.41-.59l7-7c.37-.36.59-.86.59-1.41 0-.55-.23-1.06-.59-1.42zM5.5 7C4.67 7 4 6.33 4 5.5S4.67 4 5.5 4 7 4.67 7 5.5 6.33 7 5.5 7z"/>
+              </svg>
+            </button>
+            <button 
+              className={`activity-item ${activeView === 'review' ? 'active' : ''}`}
+              onClick={() => {
+                setActiveView('review')
+                setSidebarVisible(true)
+              }}
+              title="Review"
+            >
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
               </svg>
             </button>
           </div>
@@ -82,9 +118,12 @@ function VSCodeLayout({ children }: VSCodeLayoutProps) {
           <div className="sidebar">
             <div className="sidebar-header">
               <span className="sidebar-title">
-                {activeView === 'explorer' && 'EXPLORER'}
-                {activeView === 'search' && 'SEARCH'}
-                {activeView === 'tasks' && 'TASKS'}
+                {activeView === 'inbox' && 'INBOX'}
+                {activeView === 'forecast' && 'FORECAST'}
+                {activeView === 'flagged' && 'FLAGGED'}
+                {activeView === 'projects' && 'PROJECTS'}
+                {activeView === 'tags' && 'TAGS'}
+                {activeView === 'review' && 'REVIEW'}
               </span>
               <button 
                 className="sidebar-close"
@@ -94,46 +133,52 @@ function VSCodeLayout({ children }: VSCodeLayoutProps) {
               </button>
             </div>
             <div className="sidebar-content">
-              {activeView === 'explorer' && (
+              {activeView === 'inbox' && (
                 <div className="tree-view">
                   <div className="tree-item">
                     <span className="tree-icon">📥</span>
                     <span className="tree-label">Inbox</span>
                   </div>
+                </div>
+              )}
+              {activeView === 'forecast' && (
+                <div className="tree-view">
                   <div className="tree-item">
                     <span className="tree-icon">📅</span>
                     <span className="tree-label">Forecast</span>
                   </div>
+                </div>
+              )}
+              {activeView === 'flagged' && (
+                <div className="tree-view">
                   <div className="tree-item">
                     <span className="tree-icon">🚩</span>
                     <span className="tree-label">Flagged</span>
                   </div>
+                </div>
+              )}
+              {activeView === 'projects' && (
+                <div className="tree-view">
                   <div className="tree-item">
                     <span className="tree-icon">📁</span>
                     <span className="tree-label">Projects</span>
                   </div>
+                </div>
+              )}
+              {activeView === 'tags' && (
+                <div className="tree-view">
                   <div className="tree-item">
                     <span className="tree-icon">🏷️</span>
                     <span className="tree-label">Tags</span>
                   </div>
+                </div>
+              )}
+              {activeView === 'review' && (
+                <div className="tree-view">
                   <div className="tree-item">
                     <span className="tree-icon">⭐</span>
                     <span className="tree-label">Review</span>
                   </div>
-                </div>
-              )}
-              {activeView === 'search' && (
-                <div className="search-view">
-                  <input 
-                    type="text" 
-                    className="search-input" 
-                    placeholder="Search tasks..."
-                  />
-                </div>
-              )}
-              {activeView === 'tasks' && (
-                <div className="tasks-view">
-                  <p className="empty-state">No tasks running</p>
                 </div>
               )}
             </div>
