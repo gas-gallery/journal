@@ -1,4 +1,5 @@
 import { useState, ReactNode } from 'react'
+import { useNavigate, useLocation } from 'react-router-dom'
 import './VSCodeLayout.css'
 
 interface VSCodeLayoutProps {
@@ -6,8 +7,16 @@ interface VSCodeLayoutProps {
 }
 
 function VSCodeLayout({ children }: VSCodeLayoutProps) {
+  const navigate = useNavigate()
+  const location = useLocation()
   const [activeView, setActiveView] = useState<'inbox' | 'forecast' | 'flagged' | 'projects' | 'tags' | 'review'>('inbox')
   const [sidebarVisible, setSidebarVisible] = useState(true)
+
+  const handleViewChange = (view: typeof activeView, path: string) => {
+    setActiveView(view)
+    setSidebarVisible(true)
+    navigate(path)
+  }
 
   return (
     <div className="vscode-layout">
@@ -33,10 +42,7 @@ function VSCodeLayout({ children }: VSCodeLayoutProps) {
           <div className="activity-items">
             <button 
               className={`activity-item ${activeView === 'inbox' ? 'active' : ''}`}
-              onClick={() => {
-                setActiveView('inbox')
-                setSidebarVisible(true)
-              }}
+              onClick={() => handleViewChange('inbox', '/inbox')}
               title="Inbox"
             >
               <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
@@ -45,10 +51,7 @@ function VSCodeLayout({ children }: VSCodeLayoutProps) {
             </button>
             <button 
               className={`activity-item ${activeView === 'forecast' ? 'active' : ''}`}
-              onClick={() => {
-                setActiveView('forecast')
-                setSidebarVisible(true)
-              }}
+              onClick={() => handleViewChange('forecast', '/forecast')}
               title="Forecast"
             >
               <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
@@ -57,10 +60,7 @@ function VSCodeLayout({ children }: VSCodeLayoutProps) {
             </button>
             <button 
               className={`activity-item ${activeView === 'flagged' ? 'active' : ''}`}
-              onClick={() => {
-                setActiveView('flagged')
-                setSidebarVisible(true)
-              }}
+              onClick={() => handleViewChange('flagged', '/flagged')}
               title="Flagged"
             >
               <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
@@ -69,10 +69,7 @@ function VSCodeLayout({ children }: VSCodeLayoutProps) {
             </button>
             <button 
               className={`activity-item ${activeView === 'projects' ? 'active' : ''}`}
-              onClick={() => {
-                setActiveView('projects')
-                setSidebarVisible(true)
-              }}
+              onClick={() => handleViewChange('projects', '/projects')}
               title="Projects"
             >
               <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
@@ -81,10 +78,7 @@ function VSCodeLayout({ children }: VSCodeLayoutProps) {
             </button>
             <button 
               className={`activity-item ${activeView === 'tags' ? 'active' : ''}`}
-              onClick={() => {
-                setActiveView('tags')
-                setSidebarVisible(true)
-              }}
+              onClick={() => handleViewChange('tags', '/tags')}
               title="Tags"
             >
               <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
@@ -93,10 +87,7 @@ function VSCodeLayout({ children }: VSCodeLayoutProps) {
             </button>
             <button 
               className={`activity-item ${activeView === 'review' ? 'active' : ''}`}
-              onClick={() => {
-                setActiveView('review')
-                setSidebarVisible(true)
-              }}
+              onClick={() => handleViewChange('review', '/review')}
               title="Review"
             >
               <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
