@@ -1,10 +1,12 @@
 import { useState, useEffect } from 'react'
 import { API, Project, ProjectTask } from '../utils/api'
+import { useAppContext } from '../contexts/AppContext'
 import './Projects.css'
 
 export const pageTitle = 'Projects'
 
 function Projects() {
+  const { showDescription } = useAppContext()
   const [projects, setProjects] = useState<Project[]>([])
   const [selectedProjectId, setSelectedProjectId] = useState<string | null>(null)
   const [loading, setLoading] = useState(true)
@@ -200,7 +202,7 @@ function Projects() {
           )}
         </div>
       </div>
-      <div className="projects-content">
+      <div className="projects-content" id="projects-content">
         {tasksLoading ? (
           <p className="empty-message">Loading tasks...</p>
         ) : projectTasks.length === 0 ? (
@@ -283,7 +285,7 @@ function Projects() {
                         {task.task_name}
                       </h3>
                     )}
-                    {task.description && (
+                    {showDescription && task.description && (
                       editingItem?.type === 'description' && editingItem.id === task.task_id ? (
                         <textarea
                           className="edit-textarea"

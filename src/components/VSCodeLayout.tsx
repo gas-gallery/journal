@@ -1,6 +1,7 @@
 import { useState, ReactNode, useEffect, KeyboardEvent } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { API, InboxTask } from '../utils/api'
+import { useAppContext } from '../contexts/AppContext'
 import './VSCodeLayout.css'
 
 interface VSCodeLayoutProps {
@@ -15,11 +16,11 @@ interface Tab {
 
 function VSCodeLayout({ children }: VSCodeLayoutProps) {
   const navigate = useNavigate()
+  const { showDescription, setShowDescription } = useAppContext()
   const [tabs, setTabs] = useState<Tab[]>([{ id: 'inbox-1', view: 'inbox', path: '/inbox' }])
   const [activeTabIndex, setActiveTabIndex] = useState(0)
   const [sidebarVisible, setSidebarVisible] = useState(false)
   const [secondarySidebarView, setSecondarySidebarView] = useState<'find' | null>(null)
-  const [showDescription, setShowDescription] = useState(true)
   const [inboxTasks, setInboxTasks] = useState<InboxTask[]>([])
   const [newTaskName, setNewTaskName] = useState('')
   const [menuTaskId, setMenuTaskId] = useState<string | null>(null)
