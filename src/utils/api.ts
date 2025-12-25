@@ -66,6 +66,36 @@ function getMockData(functionName: string, args: any[]): any {
 					name: args[0],
 				},
 			};
+		case "getProjectTasks":
+			return {
+				success: true,
+				data: [
+					{
+						project_name: "Website Redesign",
+						milestone_name: "Phase 2",
+						task_name: "Design homepage mockup",
+						description: "Create wireframes and visual design",
+					},
+					{
+						project_name: "Website Redesign",
+						milestone_name: "Phase 2",
+						task_name: "Implement responsive layout",
+						description: "Make design mobile-friendly",
+					},
+					{
+						project_name: "Website Redesign",
+						milestone_name: "Phase 1",
+						task_name: "Research competitors",
+						description: "Analyze 5 competitor websites",
+					},
+					{
+						project_name: "Mobile App Development",
+						milestone_name: "MVP",
+						task_name: "Setup development environment",
+						description: "Install tools and dependencies",
+					},
+				],
+			};
 		default:
 			return { success: false, error: "Unknown function" };
 	}
@@ -101,6 +131,13 @@ export interface Project {
 	name: string;
 }
 
+export interface ProjectTask {
+	project_name: string;
+	milestone_name: string | null;
+	task_name: string;
+	description: string | null;
+}
+
 export interface APIResponse<T> {
 	success: boolean;
 	data?: T;
@@ -121,4 +158,6 @@ export const API = {
 	getProjects: () => callGASFunction<APIResponse<Project[]>>("getProjects"),
 
 	createProject: (name: string) => callGASFunction<APIResponse<Project>>("createProject", name),
+
+	getProjectTasks: () => callGASFunction<APIResponse<ProjectTask[]>>("getProjectTasks"),
 };

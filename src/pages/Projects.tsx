@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { API, Project } from '../utils/api'
+import { API, Project, ProjectTask } from '../utils/api'
 import './Projects.css'
 
 export const pageTitle = 'Projects'
@@ -10,9 +10,12 @@ function Projects() {
   const [loading, setLoading] = useState(true)
   const [showInput, setShowInput] = useState(false)
   const [newProjectName, setNewProjectName] = useState('')
+  const [projectTasks, setProjectTasks] = useState<ProjectTask[]>([])
+  const [tasksLoading, setTasksLoading] = useState(true)
 
   useEffect(() => {
     loadProjects()
+    loadProjectTasks()
   }, [])
 
   const loadProjects = async () => {
@@ -29,6 +32,20 @@ function Projects() {
       console.error('Failed to load projects:', error)
     } finally {
       setLoading(false)
+    }
+  }
+
+  const loadProjectTasks = async () => {
+    try {
+      setTasksLoading(true)
+      const response = await API.getProjectTasks()
+      if (response.success && response.data) {
+        setProjectTasks(response.data)
+      }
+    } catch (error) {
+      console.error('Failed to load project tasks:', error)
+    } finally {
+      setTasksLoading(false)
     }
   }
 
@@ -105,13 +122,34 @@ function Projects() {
         </div>
       </div>
       <div className="projects-content">
-        {selectedProjectId ? (
-          <div className="project-detail">
-            <h2>{projects.find(p => p.id === selectedProjectId)?.name}</h2>
-            <p className="empty-message">Project details will be displayed here</p>
-          </div>
+        {tasksLoading ? (
+          <p className="empty-message">Loading tasks...</p>
+        ) : projectTasks.length === 0 ? (
+          <p className="empty-message">No tasks found</p>
         ) : (
-          <p className="empty-message">Select a project</p>
+          <div className="tasks-list">
+            {(() => {
+              let currentProject = ''
+              let currentMilestone = ''
+              return projectTasks.map((task, index) => (
+                <div key={index}>
+                  {task.project_name !== currentProject && (() => {
+                    currentProject = task.project_name
+                    currentMilestone = ''
+                    return <h1 className="project-heading">{task.project_name}</h1>
+                  })()}
+                  {task.milestone_name && task.milestone_name !== currentMilestone && (() => {
+                    currentMilestone = task.milestone_name
+                    return <h2 className="milestone-heading">{task.milestone_name}</h2>
+                  })()}
+                  <div className="task-item">
+                    <h3 className="task-heading">{task.task_name}</h3>
+                    {task.description && <p className="task-description">{task.description}</p>}
+                  </div>
+                </div>
+              ))
+            })()}
+          </div>
         )}
       </div>
     </div>

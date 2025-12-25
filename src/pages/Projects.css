@@ -119,6 +119,59 @@
     padding: 16px;
 }
 
+.tasks-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.project-heading {
+    margin: 24px 0 12px 0;
+    color: #00ff00;
+    font-size: 24px;
+    font-weight: 400;
+    border-bottom: 1px solid #3c3c3c;
+    padding-bottom: 8px;
+}
+
+.project-heading:first-child {
+    margin-top: 0;
+}
+
+.milestone-heading {
+    margin: 16px 0 8px 0;
+    color: #cccccc;
+    font-size: 18px;
+    font-weight: 400;
+    padding-left: 8px;
+}
+
+.task-item {
+    padding: 8px 12px;
+    background-color: #252526;
+    border-left: 2px solid #3c3c3c;
+    margin-left: 16px;
+    transition: border-color 0.2s;
+}
+
+.task-item:hover {
+    border-left-color: #00ff00;
+}
+
+.task-heading {
+    margin: 0 0 4px 0;
+    color: #cccccc;
+    font-size: 14px;
+    font-weight: 400;
+}
+
+.task-description {
+    margin: 0;
+    color: #858585;
+    font-size: 13px;
+    line-height: 1.5;
+}
+
 .project-detail h2 {
     margin: 0 0 16px 0;
     color: #cccccc;
