@@ -269,6 +269,7 @@ function VSCodeLayout({ children }: VSCodeLayoutProps) {
             <div className="editor-content-topbar">
               <div className="topbar-actions">
                 <button
+                  id="show_desc"
                   className={`toggle-btn ${showDescription ? 'active' : ''}`}
                   onClick={() => setShowDescription(!showDescription)}
                   title="Show Description"
