@@ -49,6 +49,15 @@ function getMockData(functionName: string, args: any[]): any {
 				success: true,
 				data: { id: args[0] },
 			};
+		case "getProjects":
+			return {
+				success: true,
+				data: [
+					{ id: "1", name: "Website Redesign" },
+					{ id: "2", name: "Mobile App Development" },
+					{ id: "3", name: "Marketing Campaign" },
+				],
+			};
 		default:
 			return { success: false, error: "Unknown function" };
 	}
@@ -79,6 +88,11 @@ export interface InboxTask {
 	created_on: string;
 }
 
+export interface Project {
+	id: string;
+	name: string;
+}
+
 export interface APIResponse<T> {
 	success: boolean;
 	data?: T;
@@ -95,4 +109,6 @@ export const API = {
 	deleteInboxTask: (id: string) => callGASFunction<APIResponse<{ id: string }>>("deleteInboxTask", id),
 
 	setSomedayInboxTask: (id: string) => callGASFunction<APIResponse<{ id: string }>>("setSomedayInboxTask", id),
+
+	getProjects: () => callGASFunction<APIResponse<Project[]>>("getProjects"),
 };
