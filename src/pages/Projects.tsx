@@ -138,6 +138,21 @@ function Projects() {
     }
   }
 
+  const handleToggleTaskDone = async (taskId: string, currentDone: boolean) => {
+    try {
+      const response = await API.updateTaskDone(taskId, !currentDone)
+      if (response.success) {
+        setProjectTasks(prevTasks =>
+          prevTasks.map(task =>
+            task.task_id === taskId ? { ...task, done: !currentDone } : task
+          )
+        )
+      }
+    } catch (error) {
+      console.error('Failed to update task done status:', error)
+    }
+  }
+
   return (
     <div className="projects">
       <div className="projects-navigation">
@@ -243,8 +258,15 @@ function Projects() {
                       </h2>
                     )
                   })()}
-                  <div className="task-item">
-                    {editingItem?.type === 'task' && editingItem.id === task.task_id ? (
+                  <div className={`task-item ${task.done ? 'done' : ''}`}>
+                    <input
+                      type="checkbox"
+                      className="task-checkbox"
+                      checked={task.done}
+                      onChange={() => handleToggleTaskDone(task.task_id, task.done)}
+                    />
+                    <div className="task-content">
+                      {editingItem?.type === 'task' && editingItem.id === task.task_id ? (
                       <input
                         className="edit-input task-edit"
                         value={editingItem.value}
@@ -280,6 +302,7 @@ function Projects() {
                         </p>
                       )
                     )}
+                    </div>
                   </div>
                 </div>
               ))

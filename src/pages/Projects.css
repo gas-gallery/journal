@@ -152,10 +152,32 @@
     border-left: 2px solid #3c3c3c;
     margin-left: 16px;
     transition: border-color 0.2s;
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
 }
 
 .task-item:hover {
     border-left-color: #00ff00;
+}
+
+.task-item.done .task-content {
+    text-decoration: line-through;
+    opacity: 0.6;
+}
+
+.task-checkbox {
+    width: 18px;
+    height: 18px;
+    margin-top: 2px;
+    cursor: pointer;
+    accent-color: #00ff00;
+    flex-shrink: 0;
+}
+
+.task-content {
+    flex: 1;
+    min-width: 0;
 }
 
 .task-heading {

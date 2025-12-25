@@ -78,6 +78,7 @@ function getMockData(functionName: string, args: any[]): any {
 						task_id: "1",
 						task_name: "Design homepage mockup",
 						description: "Create wireframes and visual design",
+						done: false,
 					},
 					{
 						project_id: "1",
@@ -87,6 +88,7 @@ function getMockData(functionName: string, args: any[]): any {
 						task_id: "2",
 						task_name: "Implement responsive layout",
 						description: "Make design mobile-friendly",
+						done: false,
 					},
 					{
 						project_id: "1",
@@ -96,6 +98,7 @@ function getMockData(functionName: string, args: any[]): any {
 						task_id: "3",
 						task_name: "Research competitors",
 						description: "Analyze 5 competitor websites",
+						done: true,
 					},
 					{
 						project_id: "2",
@@ -105,6 +108,7 @@ function getMockData(functionName: string, args: any[]): any {
 						task_id: "4",
 						task_name: "Setup development environment",
 						description: "Install tools and dependencies",
+						done: false,
 					},
 				],
 			};
@@ -127,6 +131,11 @@ function getMockData(functionName: string, args: any[]): any {
 			return {
 				success: true,
 				data: { id: args[0], description: args[1] },
+			};
+		case "updateTaskDone":
+			return {
+				success: true,
+				data: { id: args[0], done: args[1] },
 			};
 		default:
 			return { success: false, error: "Unknown function" };
@@ -171,6 +180,7 @@ export interface ProjectTask {
 	task_id: string;
 	task_name: string;
 	description: string | null;
+	done: boolean;
 }
 
 export interface APIResponse<T> {
@@ -203,4 +213,6 @@ export const API = {
 	updateTaskName: (id: string, name: string) => callGASFunction<APIResponse<{ id: string; name: string }>>("updateTaskName", id, name),
 
 	updateTaskDescription: (id: string, description: string) => callGASFunction<APIResponse<{ id: string; description: string }>>("updateTaskDescription", id, description),
+
+	updateTaskDone: (id: string, done: boolean) => callGASFunction<APIResponse<{ id: string; done: boolean }>>("updateTaskDone", id, done),
 };
