@@ -13,6 +13,7 @@ function Projects() {
   const [projectTasks, setProjectTasks] = useState<ProjectTask[]>([])
   const [tasksLoading, setTasksLoading] = useState(true)
   const [editingItem, setEditingItem] = useState<{ type: 'project' | 'milestone' | 'task' | 'description', id: string, value: string } | null>(null)
+  const [showDescription, setShowDescription] = useState(true)
 
   useEffect(() => {
     loadProjects()
@@ -201,6 +202,21 @@ function Projects() {
         </div>
       </div>
       <div className="projects-content">
+        <div className="projects-content-topbar">
+          <div className="topbar-actions">
+            <button
+              className={`toggle-btn ${showDescription ? 'active' : ''}`}
+              onClick={() => setShowDescription(!showDescription)}
+              title="Show Description"
+            >
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                <path d="M3 3h10v2H3V3zm0 4h10v2H3V7zm0 4h7v2H3v-2z"/>
+              </svg>
+              Description
+            </button>
+          </div>
+        </div>
+        <div className="projects-content-body">
         {tasksLoading ? (
           <p className="empty-message">Loading tasks...</p>
         ) : projectTasks.length === 0 ? (
@@ -283,7 +299,7 @@ function Projects() {
                         {task.task_name}
                       </h3>
                     )}
-                    {task.description && (
+                    {showDescription && task.description && (
                       editingItem?.type === 'description' && editingItem.id === task.task_id ? (
                         <textarea
                           className="edit-textarea"
@@ -309,6 +325,7 @@ function Projects() {
             })()}
           </div>
         )}
+        </div>
       </div>
     </div>
   )

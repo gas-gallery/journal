@@ -115,6 +115,58 @@
 
 .projects-content {
     flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.projects-content-topbar {
+    padding: 8px 16px;
+    border-bottom: 1px solid #3c3c3c;
+    background-color: #252526;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.topbar-actions {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.toggle-btn {
+    background: none;
+    border: 1px solid #3c3c3c;
+    color: #858585;
+    padding: 4px 12px;
+    font-size: 12px;
+    cursor: pointer;
+    border-radius: 2px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: all 0.2s;
+}
+
+.toggle-btn:hover {
+    background-color: #3c3c3c;
+    color: #cccccc;
+}
+
+.toggle-btn.active {
+    background-color: #00ff00;
+    color: #1e1e1e;
+    border-color: #00ff00;
+}
+
+.toggle-btn svg {
+    width: 16px;
+    height: 16px;
+}
+
+.projects-content-body {
+    flex: 1;
     overflow-y: auto;
     padding: 16px;
 }
@@ -126,8 +178,8 @@
 }
 
 .project-heading {
-    margin: 24px 0 12px 0;
-    color: #00ff00;
+    margin: 32px 0 12px 0;
+    color: #ffffff;
     font-size: 24px;
     font-weight: 700;
     border-bottom: 1px solid #3c3c3c;
@@ -142,7 +194,7 @@
     margin: 16px 0 8px 0;
     color: #cccccc;
     font-size: 18px;
-    font-weight: 400;
+    font-weight: 700;
     padding-left: 8px;
 }
 
