@@ -203,6 +203,83 @@
     padding-left: 16px;
 }
 
+/* Sidebar Inbox */
+.sidebar-inbox {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.sidebar-inbox-input {
+    padding: 4px 0;
+}
+
+.sidebar-input {
+    width: 100%;
+    padding: 6px 8px;
+    background-color: #3c3c3c;
+    border: 1px solid #3c3c3c;
+    border-radius: 2px;
+    color: #cccccc;
+    font-size: 12px;
+}
+
+.sidebar-input:focus {
+    outline: none;
+    border-color: #00ff00;
+    background-color: #1e1e1e;
+}
+
+.sidebar-input::placeholder {
+    color: #858585;
+}
+
+.sidebar-inbox-list {
+    flex: 1;
+    overflow-y: auto;
+}
+
+.sidebar-task-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.sidebar-task-item {
+    padding: 4px 0;
+    font-size: 12px;
+}
+
+.sidebar-task-label {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    cursor: pointer;
+    color: #cccccc;
+    user-select: none;
+}
+
+.sidebar-task-label input[type="checkbox"] {
+    width: 14px;
+    height: 14px;
+    cursor: pointer;
+    accent-color: #00ff00;
+    flex-shrink: 0;
+}
+
+.sidebar-task-label:has(input[type="checkbox"]:checked) span {
+    text-decoration: line-through;
+    color: #858585;
+}
+
+.sidebar-empty {
+    color: #858585;
+    font-size: 12px;
+    text-align: center;
+    padding: 20px 0;
+    margin: 0;
+}
+
 /* Search View */
 .search-view {
     padding: 8px;

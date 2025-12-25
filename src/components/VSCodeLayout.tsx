@@ -1,5 +1,6 @@
-import { useState, ReactNode } from 'react'
+import { useState, ReactNode, useEffect, KeyboardEvent } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
+import { API, InboxTask } from '../utils/api'
 import './VSCodeLayout.css'
 
 interface VSCodeLayoutProps {
@@ -11,6 +12,50 @@ function VSCodeLayout({ children }: VSCodeLayoutProps) {
   const location = useLocation()
   const [activeView, setActiveView] = useState<'inbox' | 'forecast' | 'flagged' | 'projects' | 'tags' | 'review'>('inbox')
   const [sidebarVisible, setSidebarVisible] = useState(true)
+  const [inboxTasks, setInboxTasks] = useState<InboxTask[]>([])
+  const [newTaskName, setNewTaskName] = useState('')
+
+  useEffect(() => {
+    if (activeView === 'inbox') {
+      loadInboxTasks()
+    }
+  }, [activeView])
+
+  const loadInboxTasks = async () => {
+    try {
+      const response = await API.getInboxTasks()
+      if (response.success && response.data) {
+        setInboxTasks(response.data)
+      }
+    } catch (error) {
+      console.error('Failed to load inbox tasks:', error)
+    }
+  }
+
+  const handleKeyPress = async (e: KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter' && newTaskName.trim()) {
+      try {
+        const response = await API.createInboxTask(newTaskName.trim())
+        if (response.success && response.data) {
+          setInboxTasks([response.data, ...inboxTasks])
+          setNewTaskName('')
+        }
+      } catch (error) {
+        console.error('Failed to create task:', error)
+      }
+    }
+  }
+
+  const handleToggleDone = async (id: string, done: boolean) => {
+    try {
+      const response = await API.updateInboxTask(id, !done)
+      if (response.success) {
+        setInboxTasks(inboxTasks.filter(task => task.id !== id))
+      }
+    } catch (error) {
+      console.error('Failed to update task:', error)
+    }
+  }
 
   const handleViewChange = (view: typeof activeView, path: string) => {
     setActiveView(view)
@@ -125,10 +170,36 @@ function VSCodeLayout({ children }: VSCodeLayoutProps) {
             </div>
             <div className="sidebar-content">
               {activeView === 'inbox' && (
-                <div className="tree-view">
-                  <div className="tree-item">
-                    <span className="tree-icon">📥</span>
-                    <span className="tree-label">Inbox</span>
+                <div className="sidebar-inbox">
+                  <div className="sidebar-inbox-input">
+                    <input
+                      type="text"
+                      className="sidebar-input"
+                      placeholder="New task..."
+                      value={newTaskName}
+                      onChange={(e) => setNewTaskName(e.target.value)}
+                      onKeyPress={handleKeyPress}
+                    />
+                  </div>
+                  <div className="sidebar-inbox-list">
+                    {inboxTasks.length === 0 ? (
+                      <p className="sidebar-empty">No tasks</p>
+                    ) : (
+                      <ul className="sidebar-task-list">
+                        {inboxTasks.map((task) => (
+                          <li key={task.id} className="sidebar-task-item">
+                            <label className="sidebar-task-label">
+                              <input
+                                type="checkbox"
+                                checked={task.done}
+                                onChange={() => handleToggleDone(task.id, task.done)}
+                              />
+                              <span>{task.name}</span>
+                            </label>
+                          </li>
+                        ))}
+                      </ul>
+                    )}
                   </div>
                 </div>
               )}
