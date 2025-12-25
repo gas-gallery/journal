@@ -170,7 +170,7 @@
     color: #858585;
     font-size: 13px;
     line-height: 1.5;
-    text-align: left;
+    text-align: left !important;
 }
 
 .project-detail h2 {
