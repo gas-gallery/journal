@@ -183,7 +183,21 @@ function VSCodeLayout({ children }: VSCodeLayoutProps) {
           </div>
         </div>
 
-        {/* Sidebar - moved next to secondary-sidebar */}
+        {/* Editor Area */}
+        <div className="editor-container">
+          <div className="editor-tabs">
+            <div className="editor-tab active">
+              <span className="tab-icon">📊</span>
+              <span className="tab-label">Dashboard</span>
+              <button className="tab-close">✕</button>
+            </div>
+          </div>
+          <div className="editor-content">
+            {children}
+          </div>
+        </div>
+
+        {/* Sidebar - between editor-container and secondary-sidebar */}
         {sidebarVisible && (
           <div className="sidebar">
             <div className="sidebar-header">
@@ -210,20 +224,6 @@ function VSCodeLayout({ children }: VSCodeLayoutProps) {
             </div>
           </div>
         )}
-
-        {/* Editor Area */}
-        <div className="editor-container">
-          <div className="editor-tabs">
-            <div className="editor-tab active">
-              <span className="tab-icon">📊</span>
-              <span className="tab-label">Dashboard</span>
-              <button className="tab-close">✕</button>
-            </div>
-          </div>
-          <div className="editor-content">
-            {children}
-          </div>
-        </div>
 
         {/* Secondary Sidebar */}
         <div className="secondary-sidebar">
