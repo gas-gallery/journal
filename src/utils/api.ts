@@ -59,7 +59,10 @@ export function callGASFunction<T>(functionName: string, ...args: any[]): Promis
 	if (isGASEnvironment) {
 		// Remote: Execute actual GAS function
 		return new Promise((resolve, reject) => {
-			google.script.run.withSuccessHandler(resolve).withFailureHandler(reject)[functionName](...args);
+			google.script.run
+				.withSuccessHandler(resolve)
+				.withFailureHandler(reject)
+				[functionName](...args);
 		});
 	} else {
 		// Local: Return mock data
