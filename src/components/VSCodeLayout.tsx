@@ -1,5 +1,5 @@
 import { useState, ReactNode, useEffect, KeyboardEvent } from 'react'
-import { useNavigate, useLocation } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { API, InboxTask } from '../utils/api'
 import './VSCodeLayout.css'
 
@@ -9,7 +9,6 @@ interface VSCodeLayoutProps {
 
 function VSCodeLayout({ children }: VSCodeLayoutProps) {
   const navigate = useNavigate()
-  const location = useLocation()
   const [activeView, setActiveView] = useState<'inbox' | 'forecast' | 'flagged' | 'projects' | 'tags' | 'review'>('inbox')
   const [sidebarVisible, setSidebarVisible] = useState(true)
   const [inboxTasks, setInboxTasks] = useState<InboxTask[]>([])

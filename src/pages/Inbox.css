@@ -1,154 +1,154 @@
 .inbox {
-  padding: 0;
+    padding: 0;
 }
 
 .inbox-header {
-  margin-bottom: 16px;
-  padding-bottom: 8px;
-  border-bottom: 1px solid #3c3c3c;
+    margin-bottom: 16px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #3c3c3c;
 }
 
 .inbox-header h2 {
-  margin: 0;
-  color: #cccccc;
-  font-size: 20px;
-  font-weight: 300;
+    margin: 0;
+    color: #cccccc;
+    font-size: 20px;
+    font-weight: 300;
 }
 
 .inbox-input-container {
-  margin-bottom: 20px;
+    margin-bottom: 20px;
 }
 
 .inbox-input {
-  width: 100%;
-  padding: 10px 12px;
-  background-color: #3c3c3c;
-  border: 1px solid #3c3c3c;
-  border-radius: 2px;
-  color: #cccccc;
-  font-size: 14px;
-  transition: border-color 0.2s, background-color 0.2s;
+    width: 100%;
+    padding: 10px 12px;
+    background-color: #3c3c3c;
+    border: 1px solid #3c3c3c;
+    border-radius: 2px;
+    color: #cccccc;
+    font-size: 14px;
+    transition: border-color 0.2s, background-color 0.2s;
 }
 
 .inbox-input:focus {
-  outline: none;
-  border-color: #00ff00;
-  background-color: #1e1e1e;
+    outline: none;
+    border-color: #00ff00;
+    background-color: #1e1e1e;
 }
 
 .inbox-input::placeholder {
-  color: #858585;
+    color: #858585;
 }
 
 .inbox-list {
-  margin-top: 16px;
+    margin-top: 16px;
 }
 
 .task-list {
-  list-style: none;
-  padding: 0;
-  margin: 0;
+    list-style: none;
+    padding: 0;
+    margin: 0;
 }
 
 .task-item {
-  padding: 8px 12px;
-  border-bottom: 1px solid #3c3c3c;
-  transition: background-color 0.2s;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  position: relative;
+    padding: 8px 12px;
+    border-bottom: 1px solid #3c3c3c;
+    transition: background-color 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
 }
 
 .task-item:hover {
-  background-color: #2d2d30;
+    background-color: #2d2d30;
 }
 
 .task-item:last-child {
-  border-bottom: none;
+    border-bottom: none;
 }
 
 .task-checkbox-label {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  cursor: pointer;
-  user-select: none;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    cursor: pointer;
+    user-select: none;
 }
 
 .task-checkbox-label input[type="checkbox"] {
-  width: 16px;
-  height: 16px;
-  cursor: pointer;
-  accent-color: #00ff00;
+    width: 16px;
+    height: 16px;
+    cursor: pointer;
+    accent-color: #00ff00;
 }
 
 .task-name {
-  flex: 1;
-  color: #cccccc;
-  font-size: 14px;
+    flex: 1;
+    color: #cccccc;
+    font-size: 14px;
 }
 
 .task-item:has(input[type="checkbox"]:checked) .task-name {
-  text-decoration: line-through;
-  color: #858585;
+    text-decoration: line-through;
+    color: #858585;
 }
 
 .empty-message {
-  color: #858585;
-  text-align: center;
-  margin: 40px 0;
-  font-size: 13px;
+    color: #858585;
+    text-align: center;
+    margin: 40px 0;
+    font-size: 13px;
 }
 
 .task-actions {
-  position: relative;
-  margin-left: 8px;
+    position: relative;
+    margin-left: 8px;
 }
 
 .task-menu-button {
-  background: none;
-  border: none;
-  color: #858585;
-  cursor: pointer;
-  padding: 4px 8px;
-  font-size: 16px;
-  line-height: 1;
-  border-radius: 2px;
-  transition: background-color 0.2s, color 0.2s;
+    background: none;
+    border: none;
+    color: #858585;
+    cursor: pointer;
+    padding: 4px 8px;
+    font-size: 16px;
+    line-height: 1;
+    border-radius: 2px;
+    transition: background-color 0.2s, color 0.2s;
 }
 
 .task-menu-button:hover {
-  background-color: #3c3c3c;
-  color: #cccccc;
+    background-color: #3c3c3c;
+    color: #cccccc;
 }
 
 .task-menu {
-  position: absolute;
-  right: 0;
-  top: 100%;
-  margin-top: 4px;
-  background-color: #252526;
-  border: 1px solid #3c3c3c;
-  border-radius: 2px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
-  z-index: 100;
-  min-width: 120px;
+    position: absolute;
+    right: 0;
+    top: 100%;
+    margin-top: 4px;
+    background-color: #252526;
+    border: 1px solid #3c3c3c;
+    border-radius: 2px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+    z-index: 100;
+    min-width: 120px;
 }
 
 .task-menu-item {
-  display: block;
-  width: 100%;
-  padding: 8px 12px;
-  background: none;
-  border: none;
-  color: #cccccc;
-  text-align: left;
-  cursor: pointer;
-  font-size: 13px;
-  transition: background-color 0.2s;
+    display: block;
+    width: 100%;
+    padding: 8px 12px;
+    background: none;
+    border: none;
+    color: #cccccc;
+    text-align: left;
+    cursor: pointer;
+    font-size: 13px;
+    transition: background-color 0.2s;
 }
 
 .task-menu-item:hover {
-  background-color: #2d2d30;
+    background-color: #2d2d30;
 }
