@@ -308,6 +308,13 @@ function VSCodeLayout({ children }: VSCodeLayoutProps) {
             {children}
           </div>
         </div>
+
+        {/* Secondary Sidebar */}
+        <div className="secondary-sidebar">
+          <div className="secondary-sidebar-items">
+            {/* Items will be added later */}
+          </div>
+        </div>
       </div>
 
       {/* Status Bar */}
