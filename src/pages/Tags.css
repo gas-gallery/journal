@@ -1,27 +1,27 @@
 .tags {
-  padding: 0;
+    padding: 0;
 }
 
 .tags-header {
-  margin-bottom: 16px;
-  padding-bottom: 8px;
-  border-bottom: 1px solid #3c3c3c;
+    margin-bottom: 16px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #3c3c3c;
 }
 
 .tags-header h2 {
-  margin: 0;
-  color: #cccccc;
-  font-size: 20px;
-  font-weight: 300;
+    margin: 0;
+    color: #cccccc;
+    font-size: 20px;
+    font-weight: 300;
 }
 
 .tags-content {
-  margin-top: 16px;
+    margin-top: 16px;
 }
 
 .empty-message {
-  color: #858585;
-  text-align: center;
-  margin: 40px 0;
-  font-size: 13px;
+    color: #858585;
+    text-align: center;
+    margin: 40px 0;
+    font-size: 13px;
 }

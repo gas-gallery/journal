@@ -7,14 +7,23 @@ interface VSCodeLayoutProps {
   children: ReactNode
 }
 
+interface Tab {
+  id: string
+  view: 'inbox' | 'forecast' | 'flagged' | 'projects' | 'tags' | 'review'
+  path: string
+}
+
 function VSCodeLayout({ children }: VSCodeLayoutProps) {
   const navigate = useNavigate()
-  const [activeView, setActiveView] = useState<'inbox' | 'forecast' | 'flagged' | 'projects' | 'tags' | 'review'>('inbox')
+  const [tabs, setTabs] = useState<Tab[]>([{ id: 'inbox-1', view: 'inbox', path: '/inbox' }])
+  const [activeTabIndex, setActiveTabIndex] = useState(0)
   const [sidebarVisible, setSidebarVisible] = useState(false)
   const [secondarySidebarView, setSecondarySidebarView] = useState<'find' | null>(null)
   const [inboxTasks, setInboxTasks] = useState<InboxTask[]>([])
   const [newTaskName, setNewTaskName] = useState('')
   const [menuTaskId, setMenuTaskId] = useState<string | null>(null)
+
+  const activeView = tabs[activeTabIndex]?.view || 'inbox'
 
   useEffect(() => {
     if (activeView === 'inbox') {
@@ -82,9 +91,49 @@ function VSCodeLayout({ children }: VSCodeLayoutProps) {
     }
   }
 
-  const handleViewChange = (view: typeof activeView, path: string) => {
-    setActiveView(view)
-    navigate(path)
+  const handleViewChange = (view: 'inbox' | 'forecast' | 'flagged' | 'projects' | 'tags' | 'review', path: string) => {
+    // Check if tab already exists
+    const existingTabIndex = tabs.findIndex(tab => tab.view === view)
+    
+    if (existingTabIndex !== -1) {
+      // Tab exists, activate it
+      setActiveTabIndex(existingTabIndex)
+      navigate(path)
+    } else {
+      // Create new tab next to current tab
+      const newTab: Tab = {
+        id: `${view}-${Date.now()}`,
+        view,
+        path
+      }
+      const newTabs = [...tabs]
+      newTabs.splice(activeTabIndex + 1, 0, newTab)
+      setTabs(newTabs)
+      setActiveTabIndex(activeTabIndex + 1)
+      navigate(path)
+    }
+  }
+
+  const handleTabClick = (index: number) => {
+    setActiveTabIndex(index)
+    navigate(tabs[index].path)
+  }
+
+  const handleTabClose = (index: number, e: React.MouseEvent) => {
+    e.stopPropagation()
+    if (tabs.length === 1) return // Don't close last tab
+    
+    const newTabs = tabs.filter((_, i) => i !== index)
+    setTabs(newTabs)
+    
+    // Adjust active tab index
+    if (index === activeTabIndex) {
+      const newActiveIndex = index > 0 ? index - 1 : 0
+      setActiveTabIndex(newActiveIndex)
+      navigate(newTabs[newActiveIndex].path)
+    } else if (index < activeTabIndex) {
+      setActiveTabIndex(activeTabIndex - 1)
+    }
   }
 
   const handleSecondarySidebarClick = (view: 'find') => {
@@ -97,8 +146,9 @@ function VSCodeLayout({ children }: VSCodeLayoutProps) {
     }
   }
 
-  const getPageTitle = () => {
-    const titles: Record<typeof activeView, string> = {
+  const getPageTitle = (view?: 'inbox' | 'forecast' | 'flagged' | 'projects' | 'tags' | 'review') => {
+    const targetView = view || activeView
+    const titles: Record<typeof targetView, string> = {
       inbox: 'Inbox',
       forecast: 'Forecast',
       flagged: 'Flagged',
@@ -106,7 +156,7 @@ function VSCodeLayout({ children }: VSCodeLayoutProps) {
       tags: 'Tags',
       review: 'Review'
     }
-    return titles[activeView]
+    return titles[targetView]
   }
 
   return (
@@ -198,11 +248,22 @@ function VSCodeLayout({ children }: VSCodeLayoutProps) {
         {/* Editor Area */}
         <div className="editor-container">
           <div className="editor-tabs">
-            <div className="editor-tab active">
-              <span className="tab-icon">📊</span>
-              <span className="tab-label">{getPageTitle()}</span>
-              <button className="tab-close">✕</button>
-            </div>
+            {tabs.map((tab, index) => (
+              <div 
+                key={tab.id}
+                className={`editor-tab ${index === activeTabIndex ? 'active' : ''}`}
+                onClick={() => handleTabClick(index)}
+              >
+                <span className="tab-icon">📊</span>
+                <span className="tab-label">{getPageTitle(tab.view)}</span>
+                <button 
+                  className="tab-close"
+                  onClick={(e) => handleTabClose(index, e)}
+                >
+                  ✕
+                </button>
+              </div>
+            ))}
           </div>
           <div className="editor-content">
             {children}
