@@ -254,7 +254,6 @@ function VSCodeLayout({ children }: VSCodeLayoutProps) {
                 className={`editor-tab ${index === activeTabIndex ? 'active' : ''}`}
                 onClick={() => handleTabClick(index)}
               >
-                <span className="tab-icon">📊</span>
                 <span className="tab-label">{getPageTitle(tab.view)}</span>
                 <button 
                   className="tab-close"
