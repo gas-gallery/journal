@@ -58,6 +58,14 @@ function getMockData(functionName: string, args: any[]): any {
 					{ id: "3", name: "Marketing Campaign" },
 				],
 			};
+		case "createProject":
+			return {
+				success: true,
+				data: {
+					id: Date.now().toString(),
+					name: args[0],
+				},
+			};
 		default:
 			return { success: false, error: "Unknown function" };
 	}
@@ -111,4 +119,6 @@ export const API = {
 	setSomedayInboxTask: (id: string) => callGASFunction<APIResponse<{ id: string }>>("setSomedayInboxTask", id),
 
 	getProjects: () => callGASFunction<APIResponse<Project[]>>("getProjects"),
+
+	createProject: (name: string) => callGASFunction<APIResponse<Project>>("createProject", name),
 };

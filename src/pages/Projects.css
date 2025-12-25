@@ -17,6 +17,9 @@
 .projects-nav-header {
     padding: 12px 16px;
     border-bottom: 1px solid #3c3c3c;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 
 .projects-nav-header h3 {
@@ -25,6 +28,50 @@
     font-size: 14px;
     font-weight: 400;
     text-transform: uppercase;
+}
+
+.add-project-btn {
+    background: none;
+    border: none;
+    color: #cccccc;
+    font-size: 20px;
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 2px;
+    transition: background-color 0.2s;
+}
+
+.add-project-btn:hover {
+    background-color: #3c3c3c;
+}
+
+.projects-input-container {
+    padding: 8px 12px;
+    border-bottom: 1px solid #3c3c3c;
+}
+
+.project-input {
+    width: 100%;
+    padding: 6px 8px;
+    background-color: #3c3c3c;
+    border: 1px solid #3c3c3c;
+    border-radius: 2px;
+    color: #cccccc;
+    font-size: 13px;
+}
+
+.project-input:focus {
+    outline: none;
+    border-color: #00ff00;
+    background-color: #1e1e1e;
+}
+
+.project-input::placeholder {
+    color: #858585;
 }
 
 .projects-nav-list {
