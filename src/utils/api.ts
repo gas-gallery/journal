@@ -28,6 +28,11 @@ function getMockData(functionName: string, args: any[]): any {
         success: true,
         data: { id: args[0], done: args[1] }
       };
+    case 'deleteInboxTask':
+      return {
+        success: true,
+        data: { id: args[0] }
+      };
     default:
       return { success: false, error: 'Unknown function' };
   }
@@ -76,4 +81,7 @@ export const API = {
   
   updateInboxTask: (id: string, done: boolean) => 
     callGASFunction<APIResponse<{ id: string; done: boolean }>>('updateInboxTask', id, done),
+  
+  deleteInboxTask: (id: string) => 
+    callGASFunction<APIResponse<{ id: string }>>('deleteInboxTask', id),
 };

@@ -6,6 +6,7 @@ function Inbox() {
   const [tasks, setTasks] = useState<InboxTask[]>([])
   const [newTaskName, setNewTaskName] = useState('')
   const [loading, setLoading] = useState(true)
+  const [menuTaskId, setMenuTaskId] = useState<string | null>(null)
 
   useEffect(() => {
     loadTasks()
@@ -50,6 +51,18 @@ function Inbox() {
     }
   }
 
+  const handleDeleteTask = async (id: string) => {
+    try {
+      const response = await API.deleteInboxTask(id)
+      if (response.success) {
+        setTasks(tasks.filter(task => task.id !== id))
+        setMenuTaskId(null)
+      }
+    } catch (error) {
+      console.error('Failed to delete task:', error)
+    }
+  }
+
   return (
     <div className="inbox">
       <div className="inbox-header">
@@ -84,6 +97,24 @@ function Inbox() {
                   />
                   <span className="task-name">{task.name}</span>
                 </label>
+                <div className="task-actions">
+                  <button
+                    className="task-menu-button"
+                    onClick={() => setMenuTaskId(menuTaskId === task.id ? null : task.id)}
+                  >
+                    •••
+                  </button>
+                  {menuTaskId === task.id && (
+                    <div className="task-menu">
+                      <button
+                        className="task-menu-item"
+                        onClick={() => handleDeleteTask(task.id)}
+                      >
+                        Delete
+                      </button>
+                    </div>
+                  )}
+                </div>
               </li>
             ))}
           </ul>
